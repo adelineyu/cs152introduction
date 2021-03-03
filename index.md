@@ -4,6 +4,13 @@ Group members: Nick Marsano, Daniel Tamkin, Adeline Yu
 ### Introduction
 Geoguessing is a popular web-based game where users are able to guess the location of a  randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations, based off of either a collection of snapshots of the surrounding areas or just one snapshot. 
 
+### Project Update 1 (3/2/2021) 
+Our current plan is that we will be using the IM2GPS code to create a dataset by scraping Flickr.
+
+The IM2GPS code can be found here: http://graphics.cs.cmu.edu/projects/im2gps/flickr_code.html
+
+We will then create and train our neural network that we will build on our own into being able to classify the location of Google Map Street View images on a web-based application. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files (screenshots of random Google Map Street View locations). 
+
 ### Literature Review
 Source: https://arxiv.org/abs/1810.03077
 These researchers share a similar intent as us with creating a model that could do well at playing the game GeoGuessr. They ended up  making a model that was 20 times better than chance at predicting random locations  in the US. This model could beat humans in 4 out of 5 rounds of the game. They created the 50states10K dataset which is a set of 125000 samples, 10000 unique images of each of the 50 states gathered from Google Street View. This is a dataset we are interested in looking at for our project.  
