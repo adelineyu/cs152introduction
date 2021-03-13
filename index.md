@@ -4,12 +4,16 @@ Group members: Nick Marsano, Daniel Tamkin, Adeline Yu
 ### Introduction
 Geoguessing is a popular web-based game where users are able to guess the location of a  randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations, based off of either a collection of snapshots of the surrounding areas or just one snapshot. 
 
-### Project Update 1 (3/2/2021) 
-Our current plan is that we will be using the IM2GPS code to create a dataset by scraping Flickr.
+### Project Update 1 (3/13/2021) 
+Our current plan is that we will be using the IM2GPS code to create a dataset by scraping Flickr. We initially expect to collect 1,000,000 images for our training purposes.
 
 The IM2GPS code can be found here: http://graphics.cs.cmu.edu/projects/im2gps/flickr_code.html
 
-We will then create and train our neural network that we will build on our own into being able to classify the location of Google Map Street View images on a web-based application. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files (screenshots of random Google Map Street View locations). 
+We will then create our neural network on pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files (screenshots of random Google Map Street View locations). Lastly, we will create a web-based application to classify the location of any Google Map Street View image. 
+ 
+We plan to use Google’s open-source S2 (https://code.google.com/archive/p/s2-geometry-library/) geometry library to subdivide the surface of the Earth into non-overlapping cells. From literary sources we expect to have up to 26,200 cells however we may change our methods, altering this number. We will then predict probabilities of photos  being taken from inside these individual cells in order to produce our classification output.
+
+For each input test image, we expect our neural network to output the probability of the image being taken at that location, for all possible locations. If we subdivide the Earth into 26,200 cells, then we expect 26,200 probabilities.
 
 ### Literature Review
 Source: https://arxiv.org/abs/1810.03077
@@ -25,11 +29,11 @@ Source: https://phys.org/news/2008-06-geographic-photos.html
 This article describes the IM2GPS algorithm designed by Carnegie Mellon University. The algorithm doesn’t attempt to identify distinguishing features within the photo but rather “analyzes the composition of the photo, notes how textures and colors are distributed and records the number and orientation of lines in the photo.” and then searching Flickr for similar photos. Instead of asking the computer to analyze a photo, the computer just needs to find photos that look like a given photo.
 
 ### Proposed process
-We believe that the biggest technical challenge will be getting enough inputs from the location in order to accurately guess. 
-We propose the following two methods. 
+Once we get enough images to train our neural network, we believe that the biggest task at hand is to create this neural network. We plan to create a CNN. The CNN will take the dataset, which includes snapshots from Google Street View and the labels of its location (a geographical cell partitioned on Google Earth). 
 
-- First, we will use image segmentation to identify key features in a picture and feed it into existing trained datasets. We will work on identifying languages on surrounding signs, famous landmarks, plant species, car brands, etc. 
-- Second, we will run a neural network that gets its inputs and labels directly from GeoGuesser many times. Within each game, the program will take snapshots of a path around the location, and use the collection of snapshots taken to make a guess on the location. Overtime, it will learn the best way to take snapshots and make more accurate guesses. 
+Once it is done training, the user can input some screenshot from Google Street View, feed it to our neural network, and our neural network will output the probabilities for each geographical cell, but listing the highest probability as its guess for the location. 
+
+We realize this process currently does not involve the actual game GeoGuesser, however the work we do here can then be migrated towards a neural network that can play the GeoGuesser game. 
 
 ### Assessment
 Our most ideal result is to get the location correctly within a mile. For our attainable goal, we would like our application to accurately guess the country (outside of the US) or the state. 
