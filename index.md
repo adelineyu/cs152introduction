@@ -8,23 +8,7 @@ Our current plan is that we will be using the IM2GPS provided code to create a d
 We will then create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files. We plan to use the open-source S2 (https://s2geometry.io/) geometry library to subdivide the surface of the Earth into non-overlapping cells. From literary sources we expect to have up to 26,200 cells however we may change our methods, altering this number. We will also incorporate scene filtering based on contextual knowledge about the environmental scene. We will take these two methods to predict geolocation probabilities and use that to compute our classification output. For each input test image, we expect our neural network to output the probability of the image being taken at that location, for all possible locations. If we subdivide the Earth into 26,200 cells, then we expect 26,200 probabilities. Our end result is a web-based application to classify the location of any Google Map Street View image. 
 We chose to focus on location classification of images outside of the game GeoGuesser, as the existing research and dataset we have found does the same. Having the application play within the web-application GeoGuesser is another step afterwards that we will not get to in the span of our project. 
 
-Our intended output will be a calculated probability map, see similar example on page 8 of this paper: http://graphics.cs.cmu.edu/projects/im2gps/im2gps.pdf. We would like our results to be more accurate than chance. To be more specific, this paper (http://graphics.cs.cmu.edu/projects/im2gps)  states that for every 6 guesses for each query, the median error is within 500 kilometers to the correct location. We would like our model to be around there. 
-
-### Updated Literature Review (3/18/2021)
-There is a various collection of pre-existing studies that have attempted to tackle this very problem, each proposing their own algorithms or different versions of similar algorithms. From these we took inspiration and molded our ideas as we researched our task from our initial plan to what we have now.
-
-http://graphics.cs.cmu.edu/projects/im2gps/im2gps.pdf
-
-The IM2GPS article performed a similar project. They set out with the goal to estimate geolocation from a single image via training a neural network on 6 million images scraped from Flickr and labeled with geotags. Using a nearest neighbor algorithm to compare individual photos with each of their 6 million images, comparing features such as line features, tiny images, color histograms built from the images, and more, they displayed the geographic location of a photo as a probability distribution over the Earth’s surface. 
-
-https://openaccess.thecvf.com/content_ECCV_2018/papers/Eric_Muller-Budack_Geolocation_Estimation_of_ECCV_2018_paper.pdf
-
-After subdividing the earth into geographical cells, a multi-partitioning approach was used that combines contextual information to determine the location of an image. Urban images mainly differ in architecture, people, and specific objects like cars or street signs. On the other hand, natural scenes like forests are mostly defined by the flora and fauna. Therefore, photo geolocalization can be greatly including contextual knowledge about the environmental scene. This framework can be used in addition to image classification techniques to further improve the accuracy of the model.
-https://github.com/TIBHannover/GeoEstimation
-
-https://arxiv.org/abs/1602.05314
-
-The PlaNet researchers partitioned the surface of the earth into geographic cells and trained a convolutional neural network using millions of geotagged images. Their CNN shows great promise, even attaining superhuman levels of accuracy in some cases of geolocation. This project also used long short-term memory architecture, which we will not be using, but our output will be similar to theirs, which is a probability distribution map over the Earth for inputted images. 
+Our intended output will be a calculated probability map, see similar example on page 8 of this paper: http://graphics.cs.cmu.edu/projects/im2gps/im2gps.pdf. We would like our results to be more accurate than chance. To be more specific, this paper (http://graphics.cs.cmu.edu/projects/im2gps)  states that for every 6 guesses for each query, the median error is within 500 kilometers to the correct location. We would like our model to be around there.  
 
 ### Project Update 1 (3/13/2021) 
 Our current plan is that we will be using the IM2GPS code to create a dataset by scraping Flickr. We initially expect to collect 1,000,000 images for our training purposes.
