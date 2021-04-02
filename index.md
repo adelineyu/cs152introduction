@@ -2,13 +2,26 @@
 
 Group members: Nick Marsano, Daniel Tamkin, Adeline Yu
 ### Introduction
-Geoguessing is a popular web-based game where users are able to guess the location of a  randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations of a given snapshot. However, predicting the geographical location of photos without any prior knowledge is a very challenging task. 
+Geoguessing is a popular web-based game where users are able to guess the location of a randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations of a given snapshot.
 
-Our current plan is that we will be using the IM2GPS provided code to create a dataset by scraping Flickr to collect 1,000,000 images that are location-tagged. The IM2GPS code (http://graphics.cs.cmu.edu/projects/im2gps/flickr_code.html)  is discussed more below in our Related Works Section.
-We will then create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files. We plan to use the open-source S2 (https://s2geometry.io/) geometry library to subdivide the surface of the Earth into non-overlapping cells. From literary sources we expect to have up to 26,200 cells however we may change our methods, altering this number. We will also incorporate scene filtering based on contextual knowledge about the environmental scene. We will take these two methods to predict geolocation probabilities and use that to compute our classification output. For each input test image, we expect our neural network to output the probability of the image being taken at that location, for all possible locations. If we subdivide the Earth into 26,200 cells, then we expect 26,200 probabilities. Our end result is a web-based application to classify the location of any Google Map Street View image. 
-We chose to focus on location classification of images outside of the game GeoGuesser, as the existing research and dataset we have found does the same. Having the application play within the web-application GeoGuesser is another step afterwards that we will not get to in the span of our project. 
+We spent a good portion of time trying to get the Flickr image scraping code from one of our researched papers to work, but found ourselves running into more and more issues the further we got along. We decided to shift focus to using a pre-existing dataset. We have downloaded the image dataset that we will train our CNN with. This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. As such, we have pivoted our project to identify scenes, for example “a village,” “a watering hole,” “a garden”, etc. We are now trying to build a CNN to use for our image classification problem.
 
-Our intended output will be a calculated probability map, see similar example on page 8 of this paper: http://graphics.cs.cmu.edu/projects/im2gps/im2gps.pdf. We would like our results to be more accurate than chance. To be more specific, this paper (http://graphics.cs.cmu.edu/projects/im2gps)  states that for every 6 guesses for each query, the median error is within 500 kilometers to the correct location. We would like our model to be around there.  
+We will create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files.
+
+Our intended output will be a calculated probability matrix of scenes that are the highest likelihood for the input. Our end result is a web-based application to classify the scene of an image.
+
+We intend it to perform better than chance. To be more specific, this paper (http://graphics.cs.cmu.edu/projects/im2gps) states that for every 6 guesses for each query, the median error is within 500 kilometers to the correct location. We would like our model to be around there.
+
+Issues we’ve run into so far:
+
+- We struggled to get the Flickr scraping code to work, but found a pre-existing dataset of images that we changed our focus onto.
+- Many of our literature and sources of research have achieved the exact goal we are aiming towards, many of them done by PhD students and professional computer science researchers, who have much more experience compared to us.
+- Having downloaded our image dataset of 500GB, we realized that rather than a training set of location classification images, they are actually scene classification images. As such, we have decided to pivot our project goal from location classification to scene classification.
+
+### Methods (4/1/2021)
+We are at the moment working on loading in, labelling, and converting the training and validation images for PyTorch. We will then build the CNN and the training method. After that, we will generate predictions for the test set and fine tune our model from there. We are first working with a smaller collection of images (7500 images) just for ease of development. Eventually we will run it on the larger dataset and analyze our results. 
+
+We are developing in Python using the PyTorch library among other libraries. We use Visual Studio Code Live Share to collaborate but run it on the Pomona HPC server. The dataset we are using is found here: (http://places2.csail.mit.edu/download.html) Places365 is a collection of 1.8 million training images from 365 labeled scene categories. We will eventually use all these images but for development purposes, we have decided to scale down to a small collection of those images. 
 
 ### Project Update 1 (3/13/2021) 
 Our current plan is that we will be using the IM2GPS code to create a dataset by scraping Flickr. We initially expect to collect 1,000,000 images for our training purposes.
