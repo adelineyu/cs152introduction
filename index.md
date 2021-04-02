@@ -19,7 +19,7 @@ Issues we’ve run into so far:
 - Having downloaded our image dataset of 500GB, we realized that rather than a training set of location classification images, they are actually scene classification images. As such, we have decided to pivot our project goal from location classification to scene classification.
 
 ### Methods (4/1/2021)
-We are at the moment working on loading in, labelling, and converting the training and validation images for PyTorch. We will then build the CNN and the training method. After that, we will generate predictions for the test set and fine tune our model from there. We are first working with a smaller collection of images (7500 images) just for ease of development. Eventually we will run it on the larger dataset and analyze our results. 
+We have created the script for loading in, labelling, and converting the training and validation images for PyTorch. We will then build the CNN and the training method. After that, we will generate predictions for the test set and fine tune our model from there. We are first working with a smaller collection of images (750 images) just for ease of development. Eventually we will run it on the larger dataset and analyze our results. 
 
 We are developing in Python using the PyTorch library among other libraries. We use Visual Studio Code Live Share to collaborate but run it on the Pomona HPC server. The dataset we are using is found here: (http://places2.csail.mit.edu/download.html) Places365 is a collection of 1.8 million training images from 365 labeled scene categories. We will eventually use all these images but for development purposes, we have decided to scale down to a small collection of those images. 
 
