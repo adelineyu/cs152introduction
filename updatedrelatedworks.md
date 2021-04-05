@@ -1,6 +1,4 @@
-### Introduction
-Geoguessing is a popular web-based game where users are able to guess the location of a  randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations of a given snapshot.
-
+### Project Update (3/25/2021)
 We spent a good portion of time trying to get the Flickr image scraping code from one of our researched papers to work, but found ourselves running into more and more issues the further we got along. We decided to shift focus to using a pre-existing dataset. We have downloaded the image dataset that we will train our CNN with. This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. As such, we have pivoted our project to identify scenes, for example "a village,"  "a watering hole," "a garden", etc. We are now trying to build a CNN to use for our image classification problem.
 
 We will create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files. 
