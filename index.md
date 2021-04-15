@@ -11,9 +11,9 @@ We will create our neural network using Pytorch in the Pomona HPC servers and tr
 ### Project Discussion Outline (4/15/2021)
 #### What data we are presenting
 The data we are using is scenic data in the form of 3-channel images from Places365 (http://places2.csail.mit.edu/download.html). We present the evaluations of test images and the percentage accuracy through our CNN. 
-### How we will evaluate the data
+#### How we will evaluate the data
 We are creating our own CNN from scratch in order to better drill  home the lessons taught in this course. We initially tried to create our own dataloader, however ran into difficulties with implementing concepts, such as batches, that could easily be solved using a dataloader from an existing library without detracting from our learning. We also plan to compare our CNN with an official pre-existing architecture as an added bonus.
-### How we will prove our point / Learnings
+#### How we will prove our point / Learnings
 Rather than using an existing CNN, we will be creating and editing our own neural network. From this process, we hope to further our knowledge of layers, architecture and image classification. If our model proves to be highly successful, we would like to expand it for the use of image geolocation in a future project.
 
 
