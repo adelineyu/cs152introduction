@@ -4,19 +4,18 @@ Group members: Nick Marsano, Daniel Tamkin, Adeline Yu
 ### Introduction
 Geoguessing is a popular web-based game where users are able to guess the location of a randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations of a given snapshot.
 
-We spent a good portion of time trying to get the Flickr image scraping code from one of our researched papers to work, but found ourselves running into more and more issues the further we got along. We decided to shift focus to using a pre-existing dataset. We have downloaded the image dataset that we will train our CNN with. This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. As such, we have pivoted our project to identify scenes, for example “a village,” “a watering hole,” “a garden”, etc. We are now trying to build a CNN to use for our image classification problem.
+This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. As such, we have pivoted our project to identify scenes, for example “a village,” “a watering hole,” “a garden”, etc. We are now trying to build a CNN to use for our image classification problem.
 
 We will create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files.
 
-Our intended output will be a calculated probability matrix of scenes that are the highest likelihood for the input. Our end result is a web-based application to classify the scene of an image.
+### Project Discussion Outline (4/15/2021)
+### What data we are presenting
+The data we are using is scenic data in the form of 3-channel images from Places365 (http://places2.csail.mit.edu/download.html). We present the evaluations of test images and the percentage accuracy through our CNN. 
+### How we will evaluate the data
+We are creating our own CNN from scratch in order to better drill  home the lessons taught in this course. We initially tried to create our own dataloader, however ran into difficulties with implementing concepts, such as batches, that could easily be solved using a dataloader from an existing library without detracting from our learning. We also plan to compare our CNN with an official pre-existing architecture as an added bonus.
+### How we will prove our point / Learnings
+Rather than using an existing CNN, we will be creating and editing our own neural network. From this process, we hope to further our knowledge of layers, architecture and image classification. If our model proves to be highly successful, we would like to expand it for the use of image geolocation in a future project.
 
-We intend it to perform better than chance. To be more specific, this paper (http://graphics.cs.cmu.edu/projects/im2gps) states that for every 6 guesses for each query, the median error is within 500 kilometers to the correct location. We would like our model to be around there.
-
-Issues we’ve run into so far:
-
-- We struggled to get the Flickr scraping code to work, but found a pre-existing dataset of images that we changed our focus onto.
-- Many of our literature and sources of research have achieved the exact goal we are aiming towards, many of them done by PhD students and professional computer science researchers, who have much more experience compared to us.
-- Having downloaded our image dataset of 500GB, we realized that rather than a training set of location classification images, they are actually scene classification images. As such, we have decided to pivot our project goal from location classification to scene classification.
 
 ### Methods (4/1/2021)
 We have created the script for loading in, labelling, and converting the training and validation images for PyTorch. We will then build the CNN and the training method. After that, we will generate predictions for the test set and fine tune our model from there. We are first working with a smaller collection of images (750 images) just for ease of development. Eventually we will run it on the larger dataset and analyze our results. 
