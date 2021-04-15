@@ -9,7 +9,7 @@ This image dataset (500 GB) we downloaded focused on scene classification as opp
 We will create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files.
 
 ### Project Discussion Outline (4/15/2021)
-### What data we are presenting
+#### What data we are presenting
 The data we are using is scenic data in the form of 3-channel images from Places365 (http://places2.csail.mit.edu/download.html). We present the evaluations of test images and the percentage accuracy through our CNN. 
 ### How we will evaluate the data
 We are creating our own CNN from scratch in order to better drill  home the lessons taught in this course. We initially tried to create our own dataloader, however ran into difficulties with implementing concepts, such as batches, that could easily be solved using a dataloader from an existing library without detracting from our learning. We also plan to compare our CNN with an official pre-existing architecture as an added bonus.
