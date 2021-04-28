@@ -4,34 +4,20 @@ Group members: Nick Marsano, Daniel Tamkin, Adeline Yu
 ### Introduction
 Geoguessing is a popular web-based game where users are able to guess the location of a randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations of a given snapshot.
 
-This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. As such, we have pivoted our project to identify scenes, for example “a village,” “a watering hole,” “a garden”, etc. We are now trying to build a CNN to use for our image classification problem.
+This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. Cosnequently, we pivoted our project  to build a Convultional Neural Network that could identify scenes, for example “a village,” “a watering hole,” “a garden”, etc. 
 
-We will create our neural network using Pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files.
+### Methods
+The image dataset was found through a research article Geolocation Estimation of Photos using a Hierarchical Model and Scene Classifications (https://openaccess.thecvf.com/content_ECCV_2018/papers/Eric_Muller-Budack_Geolocation_Estimation_of_ECCV_2018_paper.pdf). 
 
-### Project Discussion Outline (4/15/2021)
-#### What data we are presenting
-The data we are using is scenic data in the form of 3-channel images from Places365 (http://places2.csail.mit.edu/download.html). We present the evaluations of test images and the percentage accuracy through our CNN. 
-#### How we will evaluate the data
-We are creating our own CNN from scratch in order to better drill  home the lessons taught in this course. We initially tried to create our own dataloader, however ran into difficulties with implementing concepts, such as batches, that could easily be solved using a dataloader from an existing library without detracting from our learning. We also plan to compare our CNN with an official pre-existing architecture as an added bonus.
-#### How we will prove our point / Learnings
-Rather than using an existing CNN, we will be creating and editing our own neural network. From this process, we hope to further our knowledge of layers, architecture and image classification. If our model proves to be highly successful, we would like to expand it for the use of image geolocation in a future project.
+Our intention with this dataset was to create a basic CNN model that could classify an image’s scene. The dataset included 365 different labels for images, which included “watering hole,” “ball pit,” “village,” etc. 
 
+We implemented our model using PyTorch. To start, we wanted to work with a smaller batch of images, since our final batch would take well over 2 hours to run. We ran our model on 7000 training images. We used the ImageDataLoader from FastAI to load in our training images. We ran our model with 25 epochs. When we were ready, we ran our model on 1,825,000 training images and 36,500 validation images. 
 
-### Methods (4/1/2021)
-We have created the script for loading in, labelling, and converting the training and validation images for PyTorch. We will then build the CNN and the training method. After that, we will generate predictions for the test set and fine tune our model from there. We are first working with a smaller collection of images (750 images) just for ease of development. Eventually we will run it on the larger dataset and analyze our results. 
+We played around with the number of layers in our CNN model, the learning rate, and the inclusion of a dropout layer (which we did not find helpful in our case). We tested our model against ResNet18 and ResNet50. Discussion on our results follows in the next section. 
 
-We are developing in Python using the PyTorch library among other libraries. We use Visual Studio Code Live Share to collaborate but run it on the Pomona HPC server. The dataset we are using is found here: (http://places2.csail.mit.edu/download.html) Places365 is a collection of 1.8 million training images from 365 labeled scene categories. We will eventually use all these images but for development purposes, we have decided to scale down to a small collection of those images. 
+### Results
 
-### Project Update 1 (3/13/2021) 
-Our current plan is that we will be using the IM2GPS code to create a dataset by scraping Flickr. We initially expect to collect 1,000,000 images for our training purposes.
-
-The IM2GPS code can be found here: http://graphics.cs.cmu.edu/projects/im2gps/flickr_code.html
-
-We will then create our neural network on pytorch in the Pomona HPC servers and train it with the dataset of images we collected. The type of neural network we will use is a convolutional neural network. Our type of inputs will be .jpeg files. We will be performing a classification on those .jpeg files (screenshots of random Google Map Street View locations). Lastly, we will create a web-based application to classify the location of any Google Map Street View image. 
- 
-We plan to use Google’s open-source S2 (https://code.google.com/archive/p/s2-geometry-library/) geometry library to subdivide the surface of the Earth into non-overlapping cells. From literary sources we expect to have up to 26,200 cells however we may change our methods, altering this number. We will then predict probabilities of photos  being taken from inside these individual cells in order to produce our classification output.
-
-For each input test image, we expect our neural network to output the probability of the image being taken at that location, for all possible locations. If we subdivide the Earth into 26,200 cells, then we expect 26,200 probabilities.
+### Reflection
 
 ### Literature Review
 Source: https://arxiv.org/abs/1810.03077
@@ -46,15 +32,14 @@ This article approaches the issue of photo geolocation through image classificat
 Source: https://phys.org/news/2008-06-geographic-photos.html
 This article describes the IM2GPS algorithm designed by Carnegie Mellon University. The algorithm doesn’t attempt to identify distinguishing features within the photo but rather “analyzes the composition of the photo, notes how textures and colors are distributed and records the number and orientation of lines in the photo.” and then searching Flickr for similar photos. Instead of asking the computer to analyze a photo, the computer just needs to find photos that look like a given photo.
 
-### Proposed process
-Once we get enough images to train our neural network, we believe that the biggest task at hand is to create this neural network. We plan to create a CNN. The CNN will take the dataset, which includes snapshots from Google Street View and the labels of its location (a geographical cell partitioned on Google Earth). 
+### Ethics
+We did not see any large ethical implications of our project. Perhaps an application of this project could lead to misclassifications of certain locations but we see those implications to be currently trivial. 
 
-Once it is done training, the user can input some screenshot from Google Street View, feed it to our neural network, and our neural network will output the probabilities for each geographical cell, but listing the highest probability as its guess for the location. 
+Instead we chose to look at a research project that used image classification in a problematic way: to determine criminality. The paper is titled Automated Inference on Criminality Using Face Images. Source: https://arxiv.org/pdf/1611.04135v1.pdf
 
-We realize this process currently does not involve the actual game GeoGuesser, however the work we do here can then be migrated towards a neural network that can play the GeoGuesser game. 
+Some researchers from Shanghai Jiao Tong University collected ID photos of Chinese males and tested various classification techniques to see how effective these techniques were in recognizing whether the photo was of a criminal or not. They boast that their CNN achieved 89.51% accuracy. They also claim they used other classification techniques to find distinguishing features of “what makes a criminal a criminal.”
 
-### Assessment
-Our most ideal result is to get the location correctly within a mile. For our attainable goal, we would like our application to accurately guess the country (outside of the US) or the state. 
+Their paper unconvingily portrays their intent as innocent, however, social perception based on physical appearance is, at the root, a highly problematic behavior. The program they want to build predicts someone’s membership to a group based on physical appearances. This is simply just reinforcing pre-existing biases. 
 
-### Ethical concerns
-The only ethical implication we can think of currently is potential stalking of individuals uploading photos of their current location.
+As a byproduct, the paper raises an important concern of what we should be using CNNs for. Are we reinforcing biases and discriminating against certain groups with our programs? In what ways are we unknowingly harming society in general? 
+
