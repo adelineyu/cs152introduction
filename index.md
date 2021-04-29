@@ -19,11 +19,11 @@ We played around with the number of layers in our CNN model, the learning rate, 
 
 ### Reflection
 ![](images/fig1.png) 
-* fig1: 5 Conv layers, lr=.07 * 
+*fig1: 5 Conv layers, lr=.07* 
 ![](images/fig2.jpeg)
-* fig2: 6 Conv layers, lr=.07 *
+*fig2: 6 Conv layers, lr=.07*
 ![](images/fig3.jpeg)
-* fig3: 7 Conv layers, lr=.07 *
+*fig3: 7 Conv layers, lr=.07*
 
 
 
