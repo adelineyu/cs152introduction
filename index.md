@@ -4,7 +4,7 @@ Group members: Nick Marsano, Daniel Tamkin, Adeline Yu
 ### Introduction
 Geoguessing is a popular web-based game where users are able to guess the location of a randomized Google Street View. The game is challenging, so, as avid Geoguessers ourselves, we thought it would be a worthwhile and fun endeavor to make an application that attempts to guess the locations of a given snapshot.
 
-This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. Cosnequently, we pivoted our project  to build a Convultional Neural Network that could identify scenes, for example “a village,” “a watering hole,” “a garden”, etc. 
+This image dataset (500 GB) we downloaded focused on scene classification as opposed to geographical location classification. Cosnequently, we pivoted our project  to build a Convolutional Neural Network that could identify scenes rather than geographical locations. The dataset contains 365 categories of various structures, places and locations (amusement park, coffee shop, museum, village etc). Each scene category contains 5,000 training images and 100 validation images. Thus, we decided to build a Convolutional Neural Network that could classify the scene that a given image belongs to. If we build a CNN to classify various scene locations, and we input a random scene, then we expect it to correctly classify that scene. Across all inputs, we expect it perform >60%.
 
 ### Methods
 The image dataset was found through a research article Geolocation Estimation of Photos using a Hierarchical Model and Scene Classifications (https://openaccess.thecvf.com/content_ECCV_2018/papers/Eric_Muller-Budack_Geolocation_Estimation_of_ECCV_2018_paper.pdf). 
@@ -17,7 +17,6 @@ We played around with the number of layers in our CNN model, the learning rate, 
 
 ### Results
 
-### Reflection
 Throughout this project we experimented in two  ways when it came to testing our neural network: the first method was using our own CNN and testing different set-ups of layers both in quantity and type, as well as various learning rates. We started with the basics: the number of convolutional layers. Throughout the construction of this CNN, we implemented the same types of convolutional layers with kernel size of 3,  and padding and stride of 1, followed by a Batch Norm layer, a ReLu layer, and a Max Pooling layer with kernel size and stride of 2, resulting in our images decreasing in size by a factor of 2 with each set of layers.
 
 At a consistent learning rate of .07, we tested our network with convolutional layers varying from 5 to 8. With the smaller 5 layer CNN (fig1) we achieved an error rate of .75.
@@ -69,4 +68,12 @@ Some researchers from Shanghai Jiao Tong University collected ID photos of Chine
 Their paper unconvingily portrays their intent as innocent, however, social perception based on physical appearance is, at the root, a highly problematic behavior. The program they want to build predicts someone’s membership to a group based on physical appearances. This is simply just reinforcing pre-existing biases. 
 
 As a byproduct, the paper raises an important concern of what we should be using CNNs for. Are we reinforcing biases and discriminating against certain groups with our programs? In what ways are we unknowingly harming society in general? 
+
+### Reflection
+From this project, we have gained a deeper understanding of the implementation of neural networks and the importance of a good dataset. Initially, we tried to scrape Flickr to build our own dataset of locations, but ultimately we were unable to execute the code. Therefore, we downloaded a dataset that was already created. We also implemented our own CNN. Through this process, we learned the importance of correctly setting up each layer and matching the dimensions of each output to the input of the next layer. When testing our layers, we learned the importance of different types of layers and the effects they have on the accuracy of an image classifier.
+
+However, no matter how many modifications we did to our layers, we were never able achieve more than 35% accuracy. Even networks like Resnet18 or Resnet50 were unable to get more than 70% accuracy on our dataset. These results prompted us to look more closely at some of the images in our dataset. We noticed that some of these images were far from perfect - blurry, colorless or even unclear. Some of these images would have even been difficult for a human to classify. We experienced firsthand what a bad dataset can do to good classifiers, which is producing poor results. Next time, we would like to do this again but with a better dataset of more modern images. Possibly getting the Flickr code scraper to work, so that we have more scenes and higher quality pictures to work with. 
+
+To continue this work, we would like to take the next step of location classification. We have built a neural network that is able to classify 365 different scenes. However, we would like to build a neural network that can guess the location of any input image. We would build a new network that would subdivide the earth into different ‘location nodes’ and try to classify images as belonging to a certain location, and the final result would integrate the results from our scene classification network to achieve more accurate results.
+
 
