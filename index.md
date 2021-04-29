@@ -18,13 +18,25 @@ We played around with the number of layers in our CNN model, the learning rate, 
 ### Results
 
 ### Reflection
+{% include image.html url="/images/fig1.jpg" description="fig1: 5 Conv layers, lr=.07" %}
+{% include image.html url="/images/fig2.jpg" description="fig2: 6 Conv layers, lr=.07" %}
+{% include image.html url="/images/fig3.jpg" description="fig3: 7 Conv layers, lr=.07" %}
+{% include image.html url="/images/fig4.jpg" description="fig4: 8 Conv layers, lr=.07" %}
+{% include image.html url="/images/fig5.jpg" description="fig5: 7 Conv layers, lr=.2" %}
+{% include image.html url="/images/fig6.jpg" description="fig6: 7 Conv layers, lr=.1" %}
+
+
 
 ### Literature Review
+
+There is a various collection of pre-existing studies that we took inspiration from, ranging from scene classification to location classification based on an input of an image snapshot. 
+
+Source: http://graphics.cs.cmu.edu/projects/im2gps/im2gps.pdf
+
+The IM2GPS article performed a similar project. They set out with the goal to estimate geolocation from a single image via training a neural network on 6 million images scraped from Flickr and labeled with geotags. Using a nearest neighbor algorithm to compare individual photos with each of their 6 million images, comparing features such as line features, tiny images, color histograms built from the images, and more, they displayed the geographic location of a photo as a probability distribution over the Earth’s surface.
+
 Source: https://arxiv.org/abs/1810.03077
 These researchers share a similar intent as us with creating a model that could do well at playing the game GeoGuessr. They ended up  making a model that was 20 times better than chance at predicting random locations  in the US. This model could beat humans in 4 out of 5 rounds of the game. They created the 50states10K dataset which is a set of 125000 samples, 10000 unique images of each of the 50 states gathered from Google Street View. This is a dataset we are interested in looking at for our project.  
-
-Source: https://www.youtube.com/watch?v=mM_dC1HVAQ4
-Here, this YouTuber walks the viewer through how he trained an AI to play GeoGuessr. He shows the AI being trained in various different epochs. He uses convolutional neural networks and feature extraction to train it. 
 
 Source: https://arxiv.org/abs/1602.05314
 This article approaches the issue of photo geolocation through image classification. They subdivided the earth into thousands of multi-scale geoegraphic cells and trained a neural network using millions of geotagged images. Rather than using landmarks or approximate matching, their models integrate multiple visual cues to guess the image location. Their’s exceeded all others and even attained superhuman levels of accuracy in some cases.
