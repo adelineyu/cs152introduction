@@ -18,9 +18,29 @@ We played around with the number of layers in our CNN model, the learning rate, 
 ### Results
 
 ### Reflection
+Throughout this project we experimented in two  ways when it came to testing our neural network: the first method was using our own CNN and testing different set-ups of layers both in quantity and type, as well as various learning rates. We started with the basics: the number of convolutional layers. Throughout the construction of this CNN, we implemented the same types of convolutional layers with kernel size of 3,  and padding and stride of 1, followed by a Batch Norm layer, a ReLu layer, and a Max Pooling layer with kernel size and stride of 2, resulting in our images decreasing in size by a factor of 2 with each set of layers.
+
+At a consistent learning rate of .07, we tested our network with convolutional layers varying from 5 to 8. With the smaller 5 layer CNN (fig1) we achieved an error rate of .75.
+
 ![](images/diagram_1.jpg)
+Continuing to increase the layers, we achieved an error rate of .68 with both our 6 layered network (fig2) and our 7 layered network (fig3). This was a nice improvement with a simple change in our network, and while we tried 8 layers as well, we saw a loss in efficiency as we only achieved a .78 error rate (fig4). We went on to test different learning rates with 7 layers. 
 
+First trying a large leap in our learning rate, we tested our network with a learning rate of .2. With this we saw another decline in performance with an error rate of .69 (fig5). 
 
+We went back to a smaller number and noticing that the larger step up didn’t reduce our accuray by too much, we kept our learning rate greater than we originally had it but by a smaller margin than before. Testing at a learning rate of .1 we saw an improvement in our accuracy where our CNN achieved a .65 error rate (fig6).
+
+![](images/diagram_2.jpg)
+At various places in our testing we also wanted to expand out towards other optimization methods so we experimented with dropout layers. We tried dropout layers early on in our testing back at a learning rate of .07, and with 6 convolutional layers, getting an error rate of .75 (fig7). Seeing this decrease in accuracy didn’t raise our outlook on dropout layers, but we tried again with our 7 layered network when we moved onto a learning rate of .2 and saw an error rate of .93 (fig8).
+
+When testing these dropout layers, we changed the dropout chance around from lower and higher values, but saw that an average middle value performed best for us.
+
+Having extensively experimented with our own CNN, we wanted to also test out an officially developed and refined neural network in comparison. Opting to work with the ResNet network, we tested both ResNet18 and ResNet50 to get an idea of how the smaller and larger networks would fare once trained on our dataset. To see whether or not it was just our own CNN suffering from the larger learning rate, we tested ResNet18 on both a learning rate of .2 and .1. Our results continued to have the same theme however and with a learning rate of .2 the ResNet model achieved an error rate of .41 (fig9), while the learning rate of .1 offered an error rate of .33 (fig10).
+
+Seeing that again, the learning rate of .1 was performing best, we went ahead with using ResNet50 on our data set and achieved an error rate of .56 (fig11), a worse performance over it’s smaller variant.
+
+Unsurprisingly, the official ResNet18 model exceeded our own custom CNN by miles. However, even our best model (fig6) of 7 convolutional layers and a learning rate of .1, beat random guessing by having 34% accuracy compared to a chance of 1 in 750 (.13% accuracy).
+
+While our accuracy and model may not be anything to write home about, the processes we went through, from creating our own data loader that was later replaced with a FastAI version in order to implement batches seamlessly, to creating our own layers, calculating input sizes, and seeing what seemed to work best, were great experiences both for learning purposes and comfort purposes when it came to hands on work with neural networks. It was also an interesting journey in that we were confronted multiple times by the challenge of our project. Initially setting out to classify geographical locations, we ended up classifying scenes instead. That transition was the culmination of reading previous studies and works about neural networks, data sets, and the geographical classification problem. Realizing that the original problem was perhaps too much to handle for first-timers, we found ourselves being guided by our study and by the availability of data to our current results.
 
 ### Literature Review
 
