@@ -18,12 +18,8 @@ We played around with the number of layers in our CNN model, the learning rate, 
 ### Results
 
 ### Reflection
-{% include image.html url="/images/fig1.jpg" description="fig1: 5 Conv layers, lr=.07" %}
-{% include image.html url="/images/fig2.jpg" description="fig2: 6 Conv layers, lr=.07" %}
-{% include image.html url="/images/fig3.jpg" description="fig3: 7 Conv layers, lr=.07" %}
-{% include image.html url="/images/fig4.jpg" description="fig4: 8 Conv layers, lr=.07" %}
-{% include image.html url="/images/fig5.jpg" description="fig5: 7 Conv layers, lr=.2" %}
-{% include image.html url="/images/fig6.jpg" description="fig6: 7 Conv layers, lr=.1" %}
+![](/images/fig1.jpg)
+*fig1: 5 Conv layers, lr=.07*
 
 
 
