@@ -12,20 +12,15 @@ The image dataset was found through a research article [Geolocation Estimation o
 Our intention with this dataset was to create a basic CNN model that could classify an image’s scene. The dataset included 365 different labels for images, which included “watering hole,” “ball pit,” “village,” etc. The dataset was 20 GB, so we used the High Performance Computing server at Pomona to work in. 
 We implemented our model using [PyTorch](https://pytorch.org/). 
 
-python:cnn.py [11-54]
-
-Above is our CNN made from scratch. It is a sequential CNN with 7 linear layers. 
+[The code here](https://github.com/adelineyu/neural-unearthing/blob/a5c5a40783ebbd712be4651441284cce0dd78fc1/cnn.py#L11-L54) is our CNN made from scratch. It is a sequential CNN with 7 linear layers. 
 
 To start, we wanted to work with a smaller batch of images, since our final batch would take well over 2 hours to run the 25 epochs. We ran our model on 7000 training images, which included 100 images from 70 of the 365 classes. 
 
 We at first used an image loader that we had built from scratch ourselves but we ran into a memory issue with the batch sizes. Instead, we used the [ImageDataLoader](https://docs.fast.ai/vision.data.html#ImageDataLoaders) from [FastAI](https://www.fast.ai/) to load in our training images. 
-python:cnn.py [64]
 
 We ran our model with 25 epochs. When we were ready, we ran our final model on 1,825,000 training images and 36,500 validation images, from all 365 scene classifications.
 
-python:cnn.py [71 -79]
-
-These lines we toggled with when we tested our model against ResNet18, on line 75 and ResNet50 on line 78. We also played around with the number of layers in our CNN model, the learning rate, and the inclusion of a dropout layer (which we did not find helpful in our case). 
+[In these lines](https://github.com/adelineyu/neural-unearthing/blob/a5c5a40783ebbd712be4651441284cce0dd78fc1/cnn.py#L71-L79), we toggled between our model (line 72), ResNet18 (line 75), and ResNet50 (line 78). We also played around with the number of layers in our CNN model, the learning rate, and the inclusion of a dropout layer (which we did not find helpful in our case). 
 
 
 ### Results
@@ -83,6 +78,6 @@ From this project, we have gained a deeper understanding of the implementation o
 
 However, no matter how many modifications we did to our layers, we were never able achieve more than 35% accuracy. Even networks like Resnet18 or Resnet50 were unable to get more than 70% accuracy on our dataset. These results prompted us to look more closely at some of the images in our dataset. We noticed that some of these images were far from perfect - blurry, colorless or even unclear. Some of these images would have even been difficult for a human to classify. We experienced firsthand what a bad dataset can do to good classifiers, which is producing poor results. Next time, we would like to do this again but with a better dataset of more modern images. Possibly getting the Flickr code scraper to work, so that we have more scenes and higher quality pictures to work with.
 
-To continue this work, we would like to take the next step of location classification. We have built a neural network that is able to classify 365 different scenes. However, we would like to build a neural network that can guess the location of any input image. We would build a new network that would subdivide the earth into different ‘location nodes’ and try to classify images as belonging to a certain location, and the final result would integrate the results from our scene classification network to achieve more accurate results. The biggest challenge of this technique would be how to integrate both, since one location node might contain hundreds of possible scenes within it. Researchers have had success with subdividing the earth into various nodes [PlaNet article] (https://arxiv.org/abs/1602.05314), so the biggest challenge of this technique would be integrating the scene results from our network, since one location node might contain hundreds of different scenes within it. A possible way to do this would be to use the scene results as a way to eliminate location nodes that do not contain certain scenes within them.
+To continue this work, we would like to take the next step of location classification. We have built a neural network that is able to classify 365 different scenes. However, we would like to build a neural network that can guess the location of any input image. We would build a new network that would subdivide the earth into different ‘location nodes’ and try to classify images as belonging to a certain location, and the final result would integrate the results from our scene classification network to achieve more accurate results. The biggest challenge of this technique would be how to integrate both, since one location node might contain hundreds of possible scenes within it. Researchers have had success with subdividing the earth into various nodes [PlaNet article](https://arxiv.org/abs/1602.05314), so the biggest challenge of this technique would be integrating the scene results from our network, since one location node might contain hundreds of different scenes within it. A possible way to do this would be to use the scene results as a way to eliminate location nodes that do not contain certain scenes within them.
 
 
